@@ -226,7 +226,7 @@ kubectl cluster-info
 ------------------------------------------------
 kubectl get nodes
 ------------------------------------------------
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
 
 kubectl get all --all-namespaces
 
@@ -248,7 +248,7 @@ kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboar
 
 token
 
-eyJhbGciOiJSUzI1NiIsImtpZCI6IktFUS0zT2xKMFpBOXZTRzdOaVBsdGx3VVRPTG03Y2JzZ0VzRXZkUVgxQUEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLTk1NWtkIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiNzljNWI2NC0wZGY2LTRmMmQtYWZkMC0xMTQ1NjUwYzQyY2UiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.O-L7M4_IrJPG_ST8zhNt-J7cqU6HAwEdeVI00BjctuoQXGLaBK1ExeeY-DAEbZWytvAkADXTV4yvsLRMo5mOlhnE5xQiSMlO7e7t-AtMQSBhsij2GmipaBztiy-hl8K1_53PMOqlYDvy2hy1ava4vCOvuFPX9oEY6vXRpqG46nVmJ3TIvNRnXrL0a1dIlDDUXbujoJqdKTaKuk_GwQEaEi11hHTgP7RSkZraWwA0jTeoc1F9Bgm5vqSRMnh8SuF--yX_w9kxtwyd3zumljXp6tclrg-S1Xwafyau3IddIRi4PWYvDTr5kDcPBP0fCFDJzzT2qLeoa0PXf6VhWDgRFQ
+eyJhbGciOiJSUzI1NiIsImtpZCI6IktFUS0zT2xKMFpBOXZTRzdOaVBsdGx3VVRPTG03Y2JzZ0VzRXZkUVgxQUEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWxnZnBuIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIzMDczZWM4NS0wYWY0LTRiNDItOTVjYi05ZGZjNWNjNTE1OWQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.XFGuDOAwFRR3D-flT0zsiN6bUx3EDYidD8cOhot9DAOEGRvCSDcwoEwgs2zodhXOnKcmv7xwltxPkS1Zds3jFl4P97BRg763xoK0YcwZbM8H8YOl7JNOxGbEZ_bUjkuoxcPoiZH3lkB0wMBP1YXHETUFxgzhCM1Gk9FO3-xf8hIHBgqRCpH3p527gkg_5LMAA-0ElQD2jS54zSIjYnWK7az-wh3KBNaWKX0RoVAbZzArE-gRyNvdsOx1OLtY6NlaMJJZ38QWJ6OxiMN2cAH9-WiBEqKwbvIIOC98g-P6bCIxz0lzjxDJQlkY4vbLDms9LvZ8LC9keGhgFTGYwiVimQ
 
 -------------------------------------------------------
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
@@ -267,6 +267,7 @@ kubectl logs mysql-78dc9c6b94-vfgtq
 kubectl get services
 get ipaddress
 kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql -h mysql -ppassword
+(don't change password it's ppassword)
 create database virtusausappointmentdb;
 show databases;
 ======================================================

@@ -53,6 +53,8 @@ docker run --name data-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=d
 
 docker run --name virtusa-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=virtusacustomerdb -e MYSQL_USER=demo_user -e MYSQL_PASSWORD=demo_pass -d mysql
 
+docker run --name virtusa-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=virtusausappointmentdb -e MYSQL_USER=demo_user -e MYSQL_PASSWORD=demo_pass -d mysql
+
 docker run --name virtusa-mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=
 virtusauscustomerdevdb -e MYSQL_USER=demo_user -e MYSQL_PASSWORD=demo_pass -d mysql
 
@@ -234,9 +236,74 @@ docker run -h 192.168.99.100 -p 8761:8761 --name eurekacontainer-app -d eureka-a
 
 docker run -h 192.168.99.100 -p 8761:8761 --name eurekacontainer2019-app -d eureka2019-app:latest
 
+===============================================
+inspecting docker images
+docker image inspect 932eeab5e058
+---------------------------------------------------
+Inspect docker containers
+docker container inspect cd23b069942a 
+------------------------------------------
+Port forwarding taken care by external port
+-----------------------------------------------
+Data Volume
+
+docker container run -it -v/udata --tty ubuntu /bin/bash
+
+cd udata
+touch file1.txt
+exit
+docker container restart 2eec01eb7368
+docker attach 2eec01eb7368
+exit
+docker container rm 2eec01eb7368
+docker volume ls
+
+Docker file sharing
+docker container run -it -v e:/DockerFileShare/project/web01:/mnt/test ubuntu /bin/bash
+
+data volume container for data sharing
+docker run -it -v /data --name container1 busybox
+
+cd data
+touch file1.txt
+touch file2.txt
+let it be running
+open another terminal
+docker exec container1 ls /data
+
+launch another container
+docker run -it --volumes-from container1 --name container2 busybox
 
 
+docker run -it -p 8074:8070 -v/data --name appointment-c3
+--link virtusa-mysql:mysql appointmentapp:latest
+docker container inspect e350ffad6d4c
+can check volume name
 -----------------------------------------------------
+docker network
+docker network ls
+docker network inspect host
+
+docker run my_container --net=my_network
+docker network inspect bridge
+
+create our own network
+
+docker network create --driver bridge my_isolated_bridge_network
+docker network inspect my_isolated_bridge_network
+docker network ls
+docker run --net=my_isolated_bridge_network --name=my_psql_db postgres
+docker run –it -–network=my_isolated_bridge_network ubuntu:latest /bin/bash 
+docker network inspect my_isolated_bridge_network
+
+
+
+
+
+
+
+===============================================================
+
 Step 9
 docker hub
 https://hub.docker.com/
