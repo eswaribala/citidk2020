@@ -1,0 +1,101 @@
+
+
+
+Docker Volume
+
+docker volume create my-vol
+docker volume ls
+
+docker volume inspect my-vol
+docker volume rm my-vol
+
+Run container in volume
+docker run -it -v /data --name container1 busybox
+
+
+
+
+Docker Swarm
+
+docker swarm init --advertise-addr 192.168.99.100
+
+Create VMs using docker-machine
+$ docker-machine create --driver  virtualbox swarm-vm6 
+$ docker-machine create --driver virtualbox swarm-vm7
+$ docker-machine create --driver virtualbox swarm-vm8
+
+
+docker-machine ls
+
+to restart vm machine
+docker-machine  restart swarm-vm1
+
+ Create cluster manager for machine vm with the following command 
+
+docker-machine ssh swarm-vm1 "docker swarm init --advertise-addr 192.168.99.104"
+
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-073v8uw449vvkwngz6g0mtgivv50dbbqzt2o9f9jmwvwrkihoj-6glz90svgl4t21z1nnio0oce2 192.168.99.100:2377
+
+Add workers
+
+docker-machine ssh swarm-vm7
+docker swarm join --token SWMTKN-1-645kvd3wkvwotoyuxzsztsm0r6mfs1cy08ta85tyy3p80p28o5-3ritpm5sna4uvyz69tzrhhe9v 192.168.99.104:2377
+
+
+$ docker-machine ssh swarm-vm2 "docker swarm join --token SWMTKN-1-073v8uw449vvkwngz6g0mtgivv50dbbqzt2o9f9jmwvwrkihoj-6glz90svgl4t21z1nnio0oce2 192.168.99.100:2377"
+This node joined a swarm as a worker.
+
+$ docker-machine ssh swarm-vm3 "docker swarm join --token SWMTKN-1-073v8uw449vvkwngz6g0mtgivv50dbbqzt2o9f9jmwvwrkihoj-6glz90svgl4t21z1nnio0oce2 192.168.99.100:2377"
+This node joined a swarm as a worker.
+
+List all nodes in the swarm cluster
+
+docker-machine ssh swarm-vm1 "docker node ls"
+
+
+ docker-machine env swarm-vm1
+
+To regenrate certificate
+
+docker-machine regenerate-certs swarm-vm1
+
+eval $(docker-machine env swarm-vm1)
+
+
+docker-machine active
+
+
+Set up a Docker registry
+
+docker service create --name registry --publish published=5000,target=5000 registry:2
+
+
+
+Deploy the app on the Swarm cluster using docker stack
+Finally, Let’s deploy the application to the swarm cluster using docker stack -
+
+docker service create --name eurekaswarm -p 8761:8761 eureka-app:latest
+
+docker service create --name eurekaswarm -p 8761:8761 eureka-app:latest
+
+
+docker service create --name eurekaswarm --publish published=8761, target=8761 eureka-app:latest
+
+
+docker service ls
+
+docker service inspect eurekaswarm2019
+
+ docker service scale eurekaswarm=3
+
+
+
+
+docker service rm eurekaswarm
+
+
+
+
